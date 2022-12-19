@@ -1,4 +1,5 @@
-import Link from "next/link";
+import Header from "./Header";
+
 export default function RootLayout({
   children,
 }: {
@@ -7,8 +8,10 @@ export default function RootLayout({
   return (
     <html>
       <head />
-      <Link href="/upload">upload</Link>
-      <body>{children}</body>
+      <body>
+        <Header/>
+        {children}
+        </body>
     </html>
   );
 }

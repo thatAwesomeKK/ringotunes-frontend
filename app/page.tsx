@@ -1,9 +1,12 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
-const page = () => {
+const Page = () => {
   return (
-    <div>page</div>
-  )
-}
+    <>
+    Index!
+    </>
+  );
+};
 
-export default page
+export default Page;
