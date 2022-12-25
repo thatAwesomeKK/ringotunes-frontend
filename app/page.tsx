@@ -1,9 +1,9 @@
 import React from "react";
 
-const Page = () => {  
+const Page = () => {
   return (
     <>
-    Index!
+    <h1>This is Where the banner would be</h1>
     </>
   );
 };

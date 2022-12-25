@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --sidebar-close-width: 3.7%;
+    --sidebar-open-width: 15%;
+    --sidebar-noUser-width: 0%;
+  }

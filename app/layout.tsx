@@ -1,5 +1,9 @@
 import "../styles/globals.css";
-import Header from "./Header";
+import Navbar from "./Navbar";
+import Providers from "./Providers";
+import Sidebar from "./Sidebar";
+import Feed from "./(Home)/Feed";
+import FramerMotionDiv from "./(Layout)/FramerMotionDiv";
 
 export default function RootLayout({
   children,
@@ -10,8 +14,15 @@ export default function RootLayout({
     <html>
       <head />
       <body>
-        <Header />
+        <Providers>
+          <Navbar />
+          <Sidebar />
+        </Providers>
         {children}
+        <FramerMotionDiv>
+        {/*@ts-ignore */}
+          <Feed />
+        </FramerMotionDiv>
       </body>
     </html>
   );
