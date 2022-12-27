@@ -1,9 +1,17 @@
 import React from "react";
+import Banner from "./(Home)/Banner";
+import Feed from "./(Home)/Feed";
+import FramerMotionDiv from "./(Layout)/FramerMotionDiv";
 
 const Page = () => {
   return (
     <>
-    <h1>This is Where the banner would be</h1>
+      {/*@ts-ignore */}
+      <Banner />
+      <FramerMotionDiv>
+        {/*@ts-ignore */}
+        <Feed />
+      </FramerMotionDiv>
     </>
   );
 };

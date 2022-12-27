@@ -5,6 +5,8 @@ import Activity from "./(Components)/Activity";
 import Player from "./(Components)/Player";
 import Time from "./(Components)/Time";
 import FramerMotionDiv from "../../(Layout)/FramerMotionDiv";
+import Providers from "../../Providers";
+import Link from "next/link";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -15,9 +17,7 @@ type PageProps = {
 };
 
 const fetchRing = async (ringID: string) => {
-  const res = await fetch(`${hostname}/ring/getone/${ringID}`, {
-    cache: "no-cache",
-  });
+  const res = await fetch(`${hostname}/ring/getone/${ringID}`);
   const ring: ringtoneBody = await res.json();
   return ring;
 };
@@ -30,12 +30,12 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
       <div className="bg-gray-200 shadow-lg px-7 py-5">
         <h2 className="text-4xl font-extrabold">{ring?.title}</h2>
         <div className="text-gray-400 flex space-x-2">
-          {/* <Link href={`/profile/${ring?.uid}`}> */}
+          <Link href={`/profile/${ring?.uid?._id}`}>
           <p className="active:text-blue-300">
-            Uploaded By: {ring?.uid.username}
+            Uploaded By: {ring?.uid?.username}
           </p>
-          {/* </Link> */}
-          <Time createdAt={ring.createdAt} />
+          </Link>
+          <Time createdAt={ring?.createdAt} />
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-x-3 mt-5">
           <div className="relative h-48 w-48">
@@ -54,13 +54,10 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
               <p className="text-xl font-semibold text-center">
                 DOWNLOADS 0 | LIKES {ring?.likes?.length}
               </p>
-              <Activity />
+              <Providers>
+                <Activity docID={ring?._id} likes={ring?.likes} ringID={ring.ringID} title={ring.title} />
+              </Providers>
               <Player ringID={ring?.ringID} />
-              {/* <audio
-              src={`http://localhost:5000/ring/stream?fileid=${ring?.ringID}`}
-              controls
-              className={`w-full`}
-            ></audio> */}
             </div>
           </div>
         </div>

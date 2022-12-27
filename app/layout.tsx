@@ -19,10 +19,6 @@ export default function RootLayout({
           <Sidebar />
         </Providers>
         {children}
-        <FramerMotionDiv>
-        {/*@ts-ignore */}
-          <Feed />
-        </FramerMotionDiv>
       </body>
     </html>
   );
