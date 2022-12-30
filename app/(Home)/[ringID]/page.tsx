@@ -5,7 +5,6 @@ import Activity from "./(Components)/Activity";
 import Player from "./(Components)/Player";
 import Time from "./(Components)/Time";
 import FramerMotionDiv from "../../(Layout)/FramerMotionDiv";
-import Providers from "../../Providers";
 import Link from "next/link";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -54,9 +53,7 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
               <p className="text-xl font-semibold text-center">
                 DOWNLOADS 0 | LIKES {ring?.likes?.length}
               </p>
-              <Providers>
                 <Activity docID={ring?._id} likes={ring?.likes} ringID={ring.ringID} title={ring.title} />
-              </Providers>
               <Player ringID={ring?.ringID} />
             </div>
           </div>

@@ -8,18 +8,19 @@ import { IoLogInSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { selectToggle, toggleState } from "../util/redux/slices/sidebarSlice";
 import { selectToken } from "../util/redux/slices/tokenSlice";
+import { useAuthContext } from "./Context/AuthContext";
+import { useSideBarContext } from "./Context/SideBarContext";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
-  const isOpen = useSelector(selectToggle);
-
-  const token = useSelector(selectToken);
+  const {setIsOpen, isOpen} = useSideBarContext()
+  console.log(isOpen)
+  const {token} = useAuthContext()
 
   return (
     <nav className="flex justify-between items-center px-4 h-20 shadow-lg sticky top-0 bg-white z-50">
       <div className="flex items-center space-x-2">
         <HiMenuAlt1
-          onClick={() => dispatch(toggleState(!isOpen))}
+          onClick={() => setIsOpen(!isOpen)}
           className="h-8 w-8 cursor-pointer"
         />
         <h1 className="text-lg">RingoTunes</h1>

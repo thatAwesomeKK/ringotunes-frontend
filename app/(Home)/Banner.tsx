@@ -5,7 +5,6 @@ import FramerMotionDiv from "../(Layout)/FramerMotionDiv";
 import Time from "./[ringID]/(Components)/Time";
 import Activity from "./[ringID]/(Components)/Activity";
 import Player from "./[ringID]/(Components)/Player";
-import Providers from "../Providers";
 import Link from "next/link";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
@@ -50,9 +49,7 @@ const Banner = async () => {
               <p className="text-xl font-semibold text-center">
                 DOWNLOADS 0 | LIKES {ring[0]?.likes?.length}
               </p>
-              <Providers>
                 <Activity docID={ring[0]._id} likes={ring[0].likes} ringID={ring[0].ringID} title={ring[0].title}/>
-              </Providers>
               <Player ringID={ring[0]?.ringID} />
             </div>
           </div>

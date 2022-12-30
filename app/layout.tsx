@@ -1,9 +1,8 @@
 import "../styles/globals.css";
 import Navbar from "./Navbar";
-import Providers from "./Providers";
 import Sidebar from "./Sidebar";
-import Feed from "./(Home)/Feed";
-import FramerMotionDiv from "./(Layout)/FramerMotionDiv";
+import { AuthContextProvider } from "./Context/AuthContext";
+import { SideBarContextProvider } from "./Context/SideBarContext";
 
 export default function RootLayout({
   children,
@@ -14,11 +13,13 @@ export default function RootLayout({
     <html>
       <head />
       <body>
-        <Providers>
-          <Navbar />
-          <Sidebar />
-        </Providers>
-        {children}
+        <AuthContextProvider>
+          <SideBarContextProvider>
+            <Navbar />
+            <Sidebar />
+            {children}
+          </SideBarContextProvider>
+        </AuthContextProvider>
       </body>
     </html>
   );

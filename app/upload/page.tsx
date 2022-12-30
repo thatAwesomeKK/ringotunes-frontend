@@ -2,8 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { MdUpload } from "react-icons/md";
-import { useSelector } from "react-redux";
-import { selectToken } from "../../util/redux/slices/tokenSlice";
+import { useAuthContext } from "../Context/AuthContext";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -14,7 +13,7 @@ const Upload = () => {
   const [selectedOrigin, setSelectedOrigin] = useState("");
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  const token = useSelector(selectToken);
+  const { token } = useAuthContext();
 
   // Form reset Function
   const resetForm = () => {

@@ -10,6 +10,8 @@ import { sidebarItems } from "./(Sidebar)/SidebarData";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { selectToken } from "../util/redux/slices/tokenSlice";
+import { useAuthContext } from "./Context/AuthContext";
+import { useSideBarContext } from "./Context/SideBarContext";
 
 const spring = {
   type: "spring",
@@ -18,9 +20,10 @@ const spring = {
 };
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
-  const isOpen = useSelector(selectToggle);
-  const token = useSelector(selectToken);
+  // const dispatch = useDispatch();
+  // const isOpen = useSelector(selectToggle);
+  const {isOpen} = useSideBarContext()
+  const { token } = useAuthContext();
   const pathname = usePathname();
 
   //Using useMemo to prevent Spam Re-Renders

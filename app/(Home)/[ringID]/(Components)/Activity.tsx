@@ -1,8 +1,7 @@
 "use client";
-import React, { SetStateAction, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { selectToken } from "../../../../util/redux/slices/tokenSlice";
+import React, { useEffect, useState } from "react";
 import { saveAs } from 'file-saver';
+import { useAuthContext } from "../../../Context/AuthContext";
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 interface Props {
@@ -15,11 +14,20 @@ interface Props {
 const Activity = ({ docID, likes, ringID, title }: Props) => {
   const [likeRes, setLikeRes] = useState({});
   const [like, setLike] = useState(false);
-  const token = useSelector(selectToken);
+  const { token } = useAuthContext();
 
   //Handle Download
   const handleDownload = async()=>{
     saveAs(`${hostname}/ring/download/${ringID}`, `${title}: Ringotunes`);
+    const res = await fetch(`${hostname}/user/handle-download`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ docID, accessToken: token, }),
+    });
+    console.log(await res.json())
   }
 
   //Handling Like
@@ -29,9 +37,8 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-        accessToken: token,
       },
-      body: JSON.stringify({ docID }),
+      body: JSON.stringify({ docID, accessToken: token, }),
     });
     const likedRes = await res.json();
     
@@ -45,10 +52,9 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
         method: "POST",
         credentials: "include",
         headers: {
-          "Content-Type": "blob",
-          accessToken: token,
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ docID }),
+        body: JSON.stringify({ docID, accessToken: token, }),
       });
       const checkedLike = await res.json();
       setLike(checkedLike);

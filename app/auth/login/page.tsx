@@ -20,7 +20,6 @@ const Login = () => {
       body: JSON.stringify({ email: data.email, password: data.password }),
     });
     const user = await res.json();
-    console.log(user);
     setLoading(false);
   };
 
