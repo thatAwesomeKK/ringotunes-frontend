@@ -34,9 +34,9 @@ const ProfileChange = () => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        accessToken: token,
       },
       body: JSON.stringify({
-        accessToken: token,
         pfp: profileImg,
         username: data.username,
       }),

@@ -3,10 +3,6 @@ import React from "react";
 import { ringtoneBody } from "../../typings";
 import MusicItem from "./MusicItem";
 
-const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-
-
 const Feed = ({rings}: any) => {
   return (
     <>

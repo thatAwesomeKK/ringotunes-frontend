@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { saveAs } from 'file-saver';
+import { saveAs } from "file-saver";
 import { useAuthContext } from "../../../Context/AuthContext";
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -17,18 +17,19 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
   const { token } = useAuthContext();
 
   //Handle Download
-  const handleDownload = async()=>{
+  const handleDownload = async () => {
     saveAs(`${hostname}/ring/download/${ringID}`, `${title}: Ringotunes`);
     const res = await fetch(`${hostname}/user/handle-download`, {
       method: "POST",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        accessToken: token,
       },
-      body: JSON.stringify({ docID, accessToken: token, }),
+      body: JSON.stringify({ docID }),
     });
-    console.log(await res.json())
-  }
+    console.log(await res.json());
+  };
 
   //Handling Like
   const handleLike = async () => {
@@ -37,11 +38,12 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
+        accessToken: token,
       },
-      body: JSON.stringify({ docID, accessToken: token, }),
+      body: JSON.stringify({ docID }),
     });
     const likedRes = await res.json();
-    
+
     setLikeRes(likedRes);
   };
 
@@ -53,8 +55,9 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
+          accessToken: token,
         },
-        body: JSON.stringify({ docID, accessToken: token, }),
+        body: JSON.stringify({ docID }),
       });
       const checkedLike = await res.json();
       setLike(checkedLike);
@@ -64,7 +67,8 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
 
   return (
     <div className="flex space-x-2 mb-4">
-      <button onClick={()=>handleDownload()}
+      <button
+        onClick={() => handleDownload()}
         className="bg-green-400 w-36 py-3 rounded-xl"
       >
         Download

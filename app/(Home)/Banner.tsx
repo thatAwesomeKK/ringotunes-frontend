@@ -33,7 +33,6 @@ const Banner = async () => {
           <Time createdAt={ring[0].createdAt} />
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-x-3 mt-5">
-          <div className="relative h-48 w-48">
             <Image
               className="object-cover rounded-lg"
               src={
@@ -41,9 +40,9 @@ const Banner = async () => {
                 "https://res.cloudinary.com/dkii15ywf/image/upload/v1671997530/thumbnail/gn7po0k8qf3rybv7qxyp.jpg"
               }
               alt="photu"
-              fill={true}
+              height={200}
+              width={200}
             />
-          </div>
           <div>
             <div className="mb-6">
               <p className="text-xl font-semibold text-center">

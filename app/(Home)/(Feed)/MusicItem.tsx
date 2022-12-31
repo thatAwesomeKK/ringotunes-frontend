@@ -39,7 +39,7 @@ const MusicItem = ({
         </div>
         <div>
           <p className="font-medium text-xl">{title}</p>
-          <p>Uploaded By {uid.username}</p>
+          <p>Uploaded By {uid?.username}</p>
         </div>
       </div>
       <div className="absolute right-10 top-10 cursor-pointer flex space-x-7">

@@ -1,11 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const LoadingBanner = () => {
-  return (
-    <div className='bg-gray-200 shadow-lg h-52'>
+const Loading = () => {
+  return <h1>Loading.......</h1>;
+};
 
-    </div>
-  )
-}
-
-export default LoadingBanner
+export default Loading;
