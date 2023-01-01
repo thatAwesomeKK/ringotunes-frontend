@@ -13,6 +13,8 @@ import { selectToken } from "../util/redux/slices/tokenSlice";
 import { useAuthContext } from "./Context/AuthContext";
 import { useSideBarContext } from "./Context/SideBarContext";
 
+const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 const spring = {
   type: "spring",
   duration: 0.6,
@@ -20,9 +22,7 @@ const spring = {
 };
 
 const Sidebar = () => {
-  // const dispatch = useDispatch();
-  // const isOpen = useSelector(selectToggle);
-  const {isOpen} = useSideBarContext()
+  const { isOpen } = useSideBarContext();
   const { token } = useAuthContext();
   const pathname = usePathname();
 
@@ -31,6 +31,19 @@ const Sidebar = () => {
     () => Object.values(sidebarItems).find((menu) => menu.link === pathname),
     [pathname]
   );
+
+  //handling Logging Out!
+  const handleLogout = async () => {
+    const res = await fetch(`${hostname}/auth/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: token,
+      },
+      credentials: "include",
+    });
+    await res.json();
+  };
 
   return (
     <>
@@ -61,7 +74,7 @@ const Sidebar = () => {
             <Link href={"/dashboard"}>
               <SidebarItem Icon={MdSpaceDashboard} MenuName={"Dashboard"} />
             </Link>
-            <div>
+            <div onClick={() => handleLogout()}>
               <SidebarItem Icon={IoLogOut} MenuName={"SignOut"} />
             </div>
           </div>

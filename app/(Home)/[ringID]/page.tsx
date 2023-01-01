@@ -51,7 +51,7 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
           <div>
             <div className="mb-6">
               <p className="text-xl font-semibold text-center">
-                DOWNLOADS 0 | LIKES {ring?.likes?.length}
+                DOWNLOADS {ring?.downloads?.length} | LIKES {ring?.likes?.length}
               </p>
                 <Activity docID={ring?._id} likes={ring?.likes} ringID={ring?.ringID} title={ring?.title} />
               <Player ringID={ring?.ringID} />

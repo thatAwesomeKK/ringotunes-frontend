@@ -28,7 +28,7 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
       },
       body: JSON.stringify({ docID }),
     });
-    console.log(await res.json());
+    await res.json()
   };
 
   //Handling Like
@@ -43,7 +43,6 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
       body: JSON.stringify({ docID }),
     });
     const likedRes = await res.json();
-
     setLikeRes(likedRes);
   };
 
@@ -60,7 +59,8 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
         body: JSON.stringify({ docID }),
       });
       const checkedLike = await res.json();
-      setLike(checkedLike);
+      console.log(checkedLike.success);
+      setLike(checkedLike.success);
     };
     checkLike();
   }, [likeRes]);

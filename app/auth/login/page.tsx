@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
+import ExternalLogin from "./ExternalLogin";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -26,7 +27,7 @@ const Login = () => {
   return (
     <main className="flex w-screen justify-center items-center h-screen bg-gray-100">
       <div className="bg-white rounded-xl shadow-md h-[50%] w-[25%]">
-        <div className="p-4 flex flex-col justify-between h-full">
+        <div className="p-4 flex flex-col justify-evenly h-full">
           <div>
             <h1 className="font-bold text-5xl text-gray-400 text-center">
               RingoTunes
@@ -52,8 +53,11 @@ const Login = () => {
             >
               Sign In
             </button>
-            <Link href={"/auth/register"}>
-              <p className="cursor-pointer text-cyan-500">New User? Sign Up</p>
+            <Link
+              href={"/auth/register"}
+              className="cursor-pointer text-cyan-500"
+            >
+              New User? Sign Up
             </Link>
           </form>
           <div className="flex items-center justify-center relative">
@@ -62,22 +66,7 @@ const Login = () => {
               OR
             </div>
           </div>
-          <div className="flex flex-col justify-center items-center space-y-1">
-            {/* <ProviderButton
-              key={1}
-              Icon={AiOutlineGoogle}
-              Provider={"Google"}
-              bgColor={"bg-[#D84B37]"}
-              ProviderAction={signInWithGoogle}
-            />
-            <ProviderButton
-              key={2}
-              Icon={GrFacebookOption}
-              Provider={"Facebook"}
-              bgColor={"bg-[#3b5998]"}
-              ProviderAction={signInWithGoogle}
-            /> */}
-          </div>
+          <ExternalLogin />
         </div>
       </div>
     </main>

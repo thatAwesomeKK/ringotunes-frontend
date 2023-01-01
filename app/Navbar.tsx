@@ -13,7 +13,6 @@ import { useSideBarContext } from "./Context/SideBarContext";
 
 const Navbar = () => {
   const {setIsOpen, isOpen} = useSideBarContext()
-  console.log(isOpen)
   const {token} = useAuthContext()
 
   return (

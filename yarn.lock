@@ -165,6 +165,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@react-oauth/google@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@react-oauth/google/-/google-0.5.1.tgz#fc5cf33bff5d59583c5b0ed387431350216dd907"
+  integrity sha512-XCMMke24klAHIVnrZAMibodyjSUsxBOJ+vO5yvRptWC2Vnq02uLUnydjtIdCzCUIAxbvbFbQWZxG0xF0Y8GtHA==
+
 "@reduxjs/toolkit@^1.9.1":
   version "1.9.1"
   resolved "https://registry.npmjs.org/@reduxjs/toolkit/-/toolkit-1.9.1.tgz"
@@ -790,6 +795,11 @@ react-redux@^8.0.5:
     hoist-non-react-statics "^3.3.2"
     react-is "^18.0.0"
     use-sync-external-store "^1.0.0"
+
+react-social-login-buttons@^3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/react-social-login-buttons/-/react-social-login-buttons-3.6.1.tgz#77e5c33ac6610a29071e2ad688ef585871120763"
+  integrity sha512-DIz30W+C147s7wxwt8zgwjx5pE+gTJwtUzTNKpKZO3bEY06eLjcY1zvZ8h35hQd1Yjd7b4rLkeuZBwlLURYIfg==
 
 react-timeago@^7.1.0:
   version "7.1.0"
