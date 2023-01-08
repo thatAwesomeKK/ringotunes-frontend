@@ -179,7 +179,7 @@ const Upload = () => {
             </div>
           </div>
           <button
-            // disabled={loading}
+            disabled={loading}
             type="submit"
             className={`bg-purple-400 hover:bg-purple-500 rounded-xl hover:font-medium text-lg py-3 px-5 shadow-xl hover:scale-105 transition duration-150 ease-in-out my-4 ${
               loading && "disabled:bg-purple-300"

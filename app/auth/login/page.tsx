@@ -20,7 +20,9 @@ const Login = () => {
       credentials: "include",
       body: JSON.stringify({ email: data.email, password: data.password }),
     });
-    await res.json();
+    const json = await res.json();
+    console.log(json);
+    
     setLoading(false);
   };
 

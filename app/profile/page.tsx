@@ -1,6 +1,5 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/router";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../Context/AuthContext";
@@ -30,7 +29,7 @@ const ProfileChange = () => {
 
   const onSubmit = async (data: any) => {
     const res = await fetch(`${hostname}/auth/update`, {
-      method: "POST",
+      method: "PUT",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -41,6 +40,9 @@ const ProfileChange = () => {
         username: data.username,
       }),
     });
+    const json = await res.json();
+    console.log(json);
+    
   };
 
   return (

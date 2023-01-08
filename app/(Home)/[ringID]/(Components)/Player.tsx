@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { IoPause, IoPlay } from "react-icons/io5";
 
+const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
+
 interface Props {
   ringID: string;
 }
@@ -84,7 +86,7 @@ const Player = ({ ringID }: Props) => {
     >
       <audio
         ref={audioPlayer}
-        src={`http://localhost:5000/ring/stream?fileid=${ringID}`}
+        src={`${hostname}/ring/stream?fileid=${ringID}`}
         preload="metadata"
       ></audio>
       <button

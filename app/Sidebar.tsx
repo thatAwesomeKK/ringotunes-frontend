@@ -35,7 +35,7 @@ const Sidebar = () => {
   //handling Logging Out!
   const handleLogout = async () => {
     const res = await fetch(`${hostname}/auth/logout`, {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
         accessToken: token,

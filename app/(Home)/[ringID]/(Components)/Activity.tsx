@@ -20,7 +20,7 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
   const handleDownload = async () => {
     saveAs(`${hostname}/ring/download/${ringID}`, `${title}: Ringotunes`);
     const res = await fetch(`${hostname}/user/handle-download`, {
-      method: "POST",
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
   //Handling Like
   const handleLike = async () => {
     const res = await fetch(`${hostname}/user/handle-like`, {
-      method: "POST",
+      method: "PATCH",
       credentials: "include",
       headers: {
         "Content-Type": "application/json",

@@ -1,10 +1,11 @@
-'use client'
+"use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { storeRing } from "../../util/redux/slices/ringtoneSlice";
+import React from "react";
 import { IoTrash } from "react-icons/io5";
 import { ringtoneBody } from "../../typings";
+import { useAuthContext } from "../Context/AuthContext";
+
+const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const MusicItem = ({
   _id,
@@ -14,6 +15,19 @@ const MusicItem = ({
   ringID,
   origin,
 }: ringtoneBody) => {
+  const { token } = useAuthContext();
+  
+  const deleteRing = async(fileID: string) => {
+    const res = await fetch(`${hostname}/ring/delete/${fileID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        accessToken: token,
+      },
+    });
+    const rings = await res.json();
+    return rings;
+  };
 
   return (
     <div
@@ -41,7 +55,7 @@ const MusicItem = ({
       </div>
       <div className="absolute right-10 top-10 cursor-pointer flex space-x-7">
         <IoTrash
-          // onClick={() => deleteRingfromFirebase(id, origin, title)}
+          onClick={() => deleteRing(_id)}
           className="h-6 w-6 hover:scale-110 active:text-red-600"
         />
       </div>

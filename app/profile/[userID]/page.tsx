@@ -12,7 +12,7 @@ type PageProps = {
 };
 
 const fetchUserInfo = async (userID: string) => {
-  const res = await fetch(`${hostname}/user/user-rings/${userID}`, {
+  const res = await fetch(`${hostname}/user/profile/${userID}`, {
     cache: "no-store",
   });
   const userInfo = await res.json();

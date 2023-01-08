@@ -11,7 +11,7 @@ const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const fetchRings = async (token: string) => {
   const res = await fetch(`${hostname}/user/dash`, {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
       accessToken: token,

@@ -19,7 +19,7 @@ const fetchRingRandom = async () => {
 
 const Banner = async () => {
   const ring = await fetchRingRandom();
-
+  
   return (
     <FramerMotionDiv>
       <div className="bg-gray-200 shadow-lg px-7 py-5">
@@ -30,7 +30,7 @@ const Banner = async () => {
               Uploaded By: {ring[0]?.uid?.username}
             </p>
           </Link>
-          <Time createdAt={ring[0].createdAt} />
+          <Time createdAt={ring[0]?.createdAt} />
         </div>
         <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-x-3 mt-5">
           <div className="relative h-48 w-48">
@@ -51,10 +51,10 @@ const Banner = async () => {
                 DOWNLOADS {ring[0]?.downloads?.length} | LIKES {ring[0]?.likes?.length}
               </p>
               <Activity
-                docID={ring[0]._id}
-                likes={ring[0].likes}
-                ringID={ring[0].ringID}
-                title={ring[0].title}
+                docID={ring[0]?._id}
+                likes={ring[0]?.likes}
+                ringID={ring[0]?.ringID}
+                title={ring[0]?.title}
               />
               <Player ringID={ring[0]?.ringID} />
             </div>
