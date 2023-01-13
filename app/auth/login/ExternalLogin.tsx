@@ -1,7 +1,5 @@
 import React from "react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
-import { AiOutlineGoogle } from "react-icons/ai";
-import ProviderButton from "./ProviderButton";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -18,6 +16,7 @@ function ExternalLogin() {
       body: JSON.stringify({ googleToken: data?.credential }),
     });
     await res.json();
+    window.location.reload()
   };
 
   return (

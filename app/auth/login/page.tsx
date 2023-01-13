@@ -3,12 +3,15 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";
 import ExternalLogin from "./ExternalLogin";
+import { useRouter } from "next/navigation";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
+  const router = useRouter()
+ 
 
   const onSubmit = async (data: any) => {
     setLoading(true);
@@ -21,9 +24,8 @@ const Login = () => {
       body: JSON.stringify({ email: data.email, password: data.password }),
     });
     const json = await res.json();
-    console.log(json);
-    
     setLoading(false);
+    window.location.reload()
   };
 
   return (

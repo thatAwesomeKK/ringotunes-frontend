@@ -43,6 +43,7 @@ const Sidebar = () => {
       credentials: "include",
     });
     await res.json();
+    window.location.reload()
   };
 
   return (
