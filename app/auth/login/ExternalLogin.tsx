@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 

@@ -3,6 +3,8 @@ import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { MdUpload } from "react-icons/md";
 import { useAuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
+import { alertCall } from "../../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -28,7 +30,7 @@ const Upload = () => {
     const reader = new FileReader();
     if (e.target.files[0]) {
       setUploadRing(e.target.files[0]);
-      reader.readAsDataURL(e.target.files[0])
+      reader.readAsDataURL(e.target.files[0]);
     }
     reader.onload = async (readerEvent) => {
       setShowcaseRing(readerEvent.target?.result! as string);
@@ -50,23 +52,28 @@ const Upload = () => {
   const upload = async (e: any) => {
     e.preventDefault();
     setLoading(true);
+    const id = toast.loading("Loading...");
 
     const fd = new FormData();
     fd.append("file", uploadRing as string | Blob);
     fd.append("image", uploadRingImg as string);
     fd.append("origin", selectedOrigin as string);
     fd.append("title", title as string);
-    
+
     const res = await fetch(`${hostname}/ring/upload`, {
       method: "POST",
       credentials: "include",
-      headers:{
-        accessToken: token
+      headers: {
+        accessToken: token,
       },
       body: fd,
     });
     const payload = await res.json();
-    console.log(payload);
+    if (payload.message) {
+      alertCall("update_success", payload.message, id);
+    } else {
+      alertCall("update_error", payload.error, id);
+    }
     setLoading(false);
   };
 

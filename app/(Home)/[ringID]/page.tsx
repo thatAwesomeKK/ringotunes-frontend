@@ -4,7 +4,7 @@ import { ringtoneBody } from "../../../typings";
 import Activity from "./(Components)/Activity";
 import Player from "./(Components)/Player";
 import Time from "./(Components)/Time";
-import FramerMotionDiv from "../../(Layout)/FramerMotionDiv";
+import FramerMotionDiv from "../../(Providers)/FramerMotionDiv";
 import Link from "next/link";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;

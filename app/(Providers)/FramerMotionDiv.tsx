@@ -12,9 +12,6 @@ const spring = {
 };
 
 const FramerMotionDiv = ({ children }: any) => {
-  // const token = useSelector(selectToken);
-  // const isOpen = useSelector(selectToggle);
-
   return (
     <div className="ml-[var(--sidebar-close-width)]">
       {children}

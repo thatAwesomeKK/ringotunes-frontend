@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { selectToken } from "../util/redux/slices/tokenSlice";
 import { useAuthContext } from "./Context/AuthContext";
 import { useSideBarContext } from "./Context/SideBarContext";
+import { alertCall } from "../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -42,8 +43,11 @@ const Sidebar = () => {
       },
       credentials: "include",
     });
-    await res.json();
-    window.location.reload()
+    const payload = await res.json();
+    alertCall('success', payload.message || payload.error)
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
 
   return (

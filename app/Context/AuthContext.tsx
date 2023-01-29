@@ -9,9 +9,9 @@ import {
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-interface ContextProps {
+type ContextProps = {
   token: string;
-}
+};
 
 export const AuthContext = createContext<ContextProps>({ token: "1234" });
 

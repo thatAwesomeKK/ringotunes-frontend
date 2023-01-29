@@ -1,7 +1,7 @@
 import React from "react";
 import Banner from "./(Home)/Banner";
 import Feed from "./(Home)/Feed";
-import FramerMotionDiv from "./(Layout)/FramerMotionDiv";
+import FramerMotionDiv from "./(Providers)/FramerMotionDiv";
 
 const Page = () => {
   return (

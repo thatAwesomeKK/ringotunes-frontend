@@ -3,23 +3,16 @@ import React from "react";
 import { BsHeart, BsMusicNoteList } from "react-icons/bs";
 import { HiFolderDownload } from "react-icons/hi";
 import useSWR from "swr";
+import { fetchUserRings } from "../../util/fetchers/fetchers";
 import { useAuthContext } from "../Context/AuthContext";
 import Feed from "./Feed";
 import Widget from "./Widget";
+import { Unbounded } from "@next/font/google";
 
-const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
-
-const fetchRings = async (token: string) => {
-  const res = await fetch(`${hostname}/user/dash`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      accessToken: token,
-    },
-  });
-  const rings = await res.json();
-  return rings;
-};
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 const Dashboard = () => {
   const { token } = useAuthContext();
@@ -28,15 +21,15 @@ const Dashboard = () => {
     error,
     isValidating,
     isLoading,
-  } = useSWR(token ? "/dashboard" : null, () => fetchRings(token));
-  console.log(dash);
+  } = useSWR(token ? "/dashboard" : null, () =>
+    fetchUserRings(token, "/user/dash")
+  );
 
-  if (isValidating && isLoading) {
-    return <div>Loading...</div>;
-  }
+  console.log(dash);
 
   return (
     <div className="flex flex-col justify-center items-center mt-24 space-y-24">
+      <h1 className={`${unbounded.className} text-4xl`}>Welcome, {dash?.uid.username}!</h1>
       <div className="flex flex-row items-center justify-between w-[80%]">
         <Widget
           key={1}
@@ -49,7 +42,7 @@ const Dashboard = () => {
         <Widget
           key={2}
           name={"Your Rings"}
-          analytic={dash?.rings ? dash?.rings?.length : 0}
+          analytic={dash?.rings?.length}
           Icon={BsMusicNoteList}
           color={"bg-yellow-300"}
           iconColor={"text-yellow-700"}

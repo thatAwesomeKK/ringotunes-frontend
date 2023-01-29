@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { ringtoneBody } from "../../typings";
-import FramerMotionDiv from "../(Layout)/FramerMotionDiv";
+import FramerMotionDiv from "../(Providers)/FramerMotionDiv";
 import Time from "./[ringID]/(Components)/Time";
 import Activity from "./[ringID]/(Components)/Activity";
 import Player from "./[ringID]/(Components)/Player";

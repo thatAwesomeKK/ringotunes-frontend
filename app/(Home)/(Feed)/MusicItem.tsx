@@ -14,11 +14,6 @@ const MusicItem = ({
   thumbnail,
   likes,
 }: ringtoneBody) => {
-  // const dispatch = useDispatch();
-
-  // const ringClick = async () => {
-  //   dispatch(storeRing(id));
-  // };
 
   return (
     <div className="bg-slate-200 rounded-lg w-[97%] py-2 px-3 relative">

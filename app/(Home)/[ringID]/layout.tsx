@@ -1,4 +1,4 @@
-import FramerMotionDiv from "../../(Layout)/FramerMotionDiv";
+import FramerMotionDiv from "../../(Providers)/FramerMotionDiv";
 import Feed from "../Feed";
 
 export default function RootLayout({

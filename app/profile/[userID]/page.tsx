@@ -1,5 +1,5 @@
 import React from "react";
-import FramerMotionDiv from "../../(Layout)/FramerMotionDiv";
+import FramerMotionDiv from "../../(Providers)/FramerMotionDiv";
 import Feed from "./Feed";
 import ProfileBanner from "./ProfileBanner";
 
