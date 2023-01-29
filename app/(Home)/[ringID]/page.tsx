@@ -16,7 +16,9 @@ type PageProps = {
 };
 
 const fetchRing = async (ringID: string) => {
-  const res = await fetch(`${hostname}/ring/getone/${ringID}`);
+  const res = await fetch(`${hostname}/ring/getone/${ringID}`, {
+    cache: "no-store",
+  });
   const ring: ringtoneBody = await res.json();
   return ring;
 };
@@ -30,9 +32,9 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
         <h2 className="text-4xl font-extrabold">{ring?.title}</h2>
         <div className="text-gray-400 flex space-x-2">
           <Link href={`/profile/${ring?.uid?._id}`}>
-          <p className="active:text-blue-300">
-            Uploaded By: {ring?.uid?.username}
-          </p>
+            <p className="active:text-blue-300">
+              Uploaded By: {ring?.uid?.username}
+            </p>
           </Link>
           <Time createdAt={ring?.createdAt} />
         </div>
@@ -51,9 +53,15 @@ const Banner = async ({ params: { ringID } }: PageProps) => {
           <div>
             <div className="mb-6">
               <p className="text-xl font-semibold text-center">
-                DOWNLOADS {ring?.downloads?.length} | LIKES {ring?.likes?.length}
+                DOWNLOADS {ring?.downloads?.length} | LIKES{" "}
+                {ring?.likes?.length}
               </p>
-                <Activity docID={ring?._id} likes={ring?.likes} ringID={ring?.ringID} title={ring?.title} />
+              <Activity
+                docID={ring?._id}
+                likes={ring?.likes}
+                ringID={ring?.ringID}
+                title={ring?.title}
+              />
               <Player ringID={ring?.ringID} />
             </div>
           </div>

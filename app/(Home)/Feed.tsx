@@ -5,7 +5,9 @@ import MusicItem from "./(Feed)/MusicItem";
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const fetchRings = async () => {
-  const res = await fetch(`${hostname}/ring/files?page=1&limit=4`);
+  const res = await fetch(`${hostname}/ring/files?page=1&limit=4`, {
+    cache: "no-store",
+  });
   const payload = await res.json();
   const rings: [ringtoneBody] = payload.ring;
   return rings;
@@ -17,7 +19,11 @@ const Feed = async () => {
   return (
     <div className="flex flex-col justify-center items-center space-y-3 bg-gray-300 py-4 rounded-xl flex-1 m-4">
       {rings?.map((ring) => (
-        <Link className="w-full flex justify-center items-center" href={`/${ring._id}`} key={ring._id}>
+        <Link
+          className="w-full flex justify-center items-center"
+          href={`/${ring._id}`}
+          key={ring._id}
+        >
           <MusicItem
             _id={ring._id}
             ringID={ring.ringID}
