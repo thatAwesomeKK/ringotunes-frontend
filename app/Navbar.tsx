@@ -4,6 +4,7 @@ import { IoLogInSharp } from "react-icons/io5";
 import { cookies } from "next/headers";
 import ProfilePic from "./(NavBar)/ProfilePic";
 import SideBarButton from "./(NavBar)/SideBarButton";
+import DropDown from "./(DropDown)/DropDown";
 
 const Navbar = () => {
   const nextCookies = cookies();
@@ -25,7 +26,10 @@ const Navbar = () => {
               <IoMdCloudUpload className="h-6 w-6 text-blue-400" />
               <p className="text-blue-500">Upload</p>
             </Link>
-            <ProfilePic />
+            <div className="relative">
+              <ProfilePic />
+              <DropDown />
+            </div>
           </div>
         )}
         {!token && (

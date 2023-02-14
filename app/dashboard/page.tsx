@@ -25,12 +25,10 @@ const Dashboard = () => {
     fetchUserRings(token, "/user/dash")
   );
 
-  console.log(dash);
-
   return (
     <div className="flex flex-col justify-center items-center mt-24 space-y-24">
       <h1 className={`${unbounded.className} text-4xl`}>Welcome, {dash?.uid.username}!</h1>
-      <div className="flex flex-row items-center justify-between w-[80%]">
+      <div className="flex flex-col sm:flex-row space-y-2 items-center justify-between w-[80%]">
         <Widget
           key={1}
           name={"Liked Rings"}

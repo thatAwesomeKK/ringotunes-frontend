@@ -44,7 +44,7 @@ const Sidebar = () => {
       credentials: "include",
     });
     const payload = await res.json();
-    alertCall('success', payload.message || payload.error)
+    alertCall("success", payload.message || payload.error);
     setTimeout(() => {
       window.location.reload();
     }, 1000);

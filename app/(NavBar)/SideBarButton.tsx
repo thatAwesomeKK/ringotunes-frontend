@@ -8,7 +8,7 @@ function SideBarButton() {
   return (
     <HiMenuAlt1
       onClick={() => setIsOpen(!isOpen)}
-      className="h-8 w-8 cursor-pointer hidden sm:flex"
+      className="h-8 w-8 cursor-pointer sm:flex hidden"
     />
   );
 }
