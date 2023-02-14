@@ -12,7 +12,7 @@ const Navbar = () => {
   return (
     <nav className="flex justify-between items-center px-4 h-20 shadow-lg sticky top-0 bg-white z-50">
       <div className="flex items-center space-x-2">
-        <SideBarButton />
+        {token && <SideBarButton />}
         <h1 className="text-lg">RingoTunes</h1>
       </div>
       <div className="flex space-x-2">

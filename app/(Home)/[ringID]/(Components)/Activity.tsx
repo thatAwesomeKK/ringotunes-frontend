@@ -18,7 +18,6 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
 
   //Handle Download
   const handleDownload = async () => {
-    saveAs(`${hostname}/ring/download/${ringID}`, `${title}: Ringotunes`);
     const res = await fetch(`${hostname}/user/handle-download`, {
       method: "PATCH",
       credentials: "include",
@@ -28,7 +27,10 @@ const Activity = ({ docID, likes, ringID, title }: Props) => {
       },
       body: JSON.stringify({ docID }),
     });
-    await res.json()
+    const payload = await res.json();
+    if (payload.success === true) {
+      saveAs(`${hostname}/ring/download/${ringID}`, `${title}: Ringotunes`);
+    }
   };
 
   //Handling Like

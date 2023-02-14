@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    --sidebar-close-width: 3.7%;
-    --sidebar-open-width: 15%;
+    --sidebar-close-width: 68px;
+    --sidebar-open-width: 300px;
     --sidebar-noUser-width: 0%;
   }

@@ -1,9 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-import { selectToggle } from "../../util/redux/slices/sidebarSlice";
-import { selectToken } from "../../util/redux/slices/tokenSlice";
 
 const spring = {
   type: "spring",
@@ -13,7 +9,7 @@ const spring = {
 
 const FramerMotionDiv = ({ children }: any) => {
   return (
-    <div className="ml-[var(--sidebar-close-width)]">
+    <div className="ml-0 sm:ml-[var(--sidebar-close-width)]">
       {children}
     </div>
   );

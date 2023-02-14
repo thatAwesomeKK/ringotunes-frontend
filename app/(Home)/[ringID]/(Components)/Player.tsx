@@ -12,6 +12,7 @@ const Player = ({ ringID }: Props) => {
   const [isPlaying, setIsPlaying] = useState<Boolean>(false);
   const [duration, setDuration] = useState<number>(0);
   const [currentTime, setCurrentTime] = useState<number>(0);
+  const [loading, setLoading] = useState<Boolean>(true)
 
   //Refrerences
   const audioPlayer = useRef<HTMLAudioElement>(null); //main audio tag
@@ -88,6 +89,7 @@ const Player = ({ ringID }: Props) => {
         ref={audioPlayer}
         src={`${hostname}/ring/stream?fileid=${ringID}`}
         preload="metadata"
+        onLoadedMetadata={()=>setLoading(false)}
       ></audio>
       <button
         onClick={togglePlayPause}
