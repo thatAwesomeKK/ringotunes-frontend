@@ -1,7 +1,5 @@
 "use client";
 import React, { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectToggle } from "../util/redux/slices/sidebarSlice";
 import { MdSpaceDashboard } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import Link from "next/link";
@@ -9,7 +7,6 @@ import SidebarItem from "./(Sidebar)/SidebarItem";
 import { sidebarItems } from "./(Sidebar)/SidebarData";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { selectToken } from "../util/redux/slices/tokenSlice";
 import { useAuthContext } from "./Context/AuthContext";
 import { useSideBarContext } from "./Context/SideBarContext";
 import { alertCall } from "../util/toast/alertCall";
@@ -51,7 +48,7 @@ const Sidebar = () => {
   };
 
   return (
-    <>
+    <div className="sm:flex hidden">
       {token && (
         <motion.div
           initial={{ width: "--sidebar-close-width" }}
@@ -61,7 +58,7 @@ const Sidebar = () => {
               ? "var(--sidebar-open-width)"
               : "var(--sidebar-close-width)",
           }}
-          className="fixed hidden left-0 bg-slate-50 z-10 px-2 py-5 border-2 rounded-r-lg sm:flex flex-col justify-between h-[92%]"
+          className="fixed flex left-0 bg-slate-50 z-10 px-2 py-5 border-2 rounded-r-lg flex-col justify-between h-[92%]"
         >
           <div>
             {Object.values(sidebarItems).map((item, i) => (
@@ -85,7 +82,7 @@ const Sidebar = () => {
           </div>
         </motion.div>
       )}
-    </>
+    </div>
   );
 };
 
