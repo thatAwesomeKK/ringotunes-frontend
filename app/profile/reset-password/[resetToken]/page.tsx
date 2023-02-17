@@ -4,8 +4,6 @@ import Form from "./Form";
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const checkVerify = async (resetToken: string) => {
-  console.log(resetToken);
-  
   const res = await fetch(
     `${hostname}/auth/forgot-password-verify?token=${resetToken}`
   );

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { alertCall } from "../../../util/toast/alertCall";
@@ -12,10 +12,12 @@ const input = "flex flex-col my-1";
 
 function RegisterForm() {
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
     const id = toast.loading("Registering....");
+    setLoading(true);
 
     if (data.password !== data.CnPassword) {
       return console.log("Password and Confirm Password not Equal");
@@ -34,12 +36,13 @@ function RegisterForm() {
     const payload = await res.json();
     if (payload.message) {
       alertCall("update_success", payload.message, id);
+      setTimeout(() => {
+        router.push("/auth/login");
+      }, 2000);
     } else {
       alertCall("update_error", payload.error, id);
     }
-    setTimeout(() => {
-      router.push("/auth/login");
-    }, 2000);
+    setLoading(false);
   };
 
   return (
@@ -77,8 +80,9 @@ function RegisterForm() {
         />
       </div>
       <button
-        className="bg-[rgb(1,117,211)] py-3 text-white rounded-md hover:bg-[rgba(1,116,211,0.74)] mt-6"
+        className="bg-[rgb(1,117,211)] py-3 text-white rounded-md hover:bg-[rgba(1,116,211,0.74)] mt-6 disabled:bg-[rgba(1,116,211,0.56)]"
         type="submit"
+        disabled={loading}
       >
         Sign Up
       </button>

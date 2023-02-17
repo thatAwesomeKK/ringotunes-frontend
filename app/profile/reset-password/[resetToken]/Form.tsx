@@ -1,6 +1,9 @@
 "use client";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { alertCall } from "../../../../util/toast/alertCall";
 
 const input = "flex flex-col my-1";
 
@@ -12,9 +15,12 @@ type Props = {
 
 function Form({ tempToken }: Props) {
   const { register, handleSubmit } = useForm();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
+    setLoading(true);
+    const id = toast.loading("Resetting...");
 
     if (data.password !== data.CnPassword) {
       return console.log("Password and Confirm Password not Equal");
@@ -32,7 +38,13 @@ function Form({ tempToken }: Props) {
       }
     );
     const payload = await res.json();
-    console.log(payload);
+    setLoading(false);
+    if (payload.success) {
+      alertCall("update_success", payload.message, id);
+      router.push("/");
+    } else {
+      alertCall("update_error", payload.error, id);
+    }
   };
 
   return (
@@ -54,8 +66,9 @@ function Form({ tempToken }: Props) {
         />
       </div>
       <button
-        className="bg-[rgb(1,117,211)] py-3 text-white rounded-md hover:bg-[rgba(1,116,211,0.74)] mt-6"
+        className="bg-[rgb(1,117,211)] py-3 text-white rounded-md hover:bg-[rgba(1,116,211,0.74)] mt-6 disabled:bg-[rgba(1,116,211,0.56)]"
         type="submit"
+        disabled={loading}
       >
         Submit
       </button>

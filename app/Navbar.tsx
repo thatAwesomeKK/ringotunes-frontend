@@ -5,6 +5,12 @@ import { cookies } from "next/headers";
 import ProfilePic from "./(NavBar)/ProfilePic";
 import SideBarButton from "./(NavBar)/SideBarButton";
 import DropDown from "./(DropDown)/DropDown";
+import { Permanent_Marker } from "@next/font/google";
+
+const permanent_marker = Permanent_Marker({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const Navbar = () => {
   const nextCookies = cookies();
@@ -14,7 +20,7 @@ const Navbar = () => {
     <nav className="flex justify-between items-center px-4 h-20 shadow-lg sticky top-0 bg-white z-50">
       <div className="flex items-center space-x-2">
         {token && <SideBarButton />}
-        <h1 className="text-lg">RingoTunes</h1>
+        <Link href={'/'} className={`${permanent_marker.className} text-2xl`}>RingoTunes</Link>
       </div>
       <div className="flex space-x-2">
         {token && (

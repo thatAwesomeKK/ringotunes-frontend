@@ -23,15 +23,15 @@ function LoginForm() {
       body: JSON.stringify({ email: data.email, password: data.password }),
     });
     const payload = await res.json();
-    if (payload.message) {
+    if (payload.success) {
       alertCall("update_success", payload.message, id);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } else {
       alertCall("update_error", payload.error, id);
     }
-    setTimeout(() => {
-      setLoading(false);
-      window.location.reload();
-    }, 2000);
+    setLoading(false);
   };
 
   return (
@@ -57,6 +57,12 @@ function LoginForm() {
       </button>
       <Link href={"/auth/register"} className="cursor-pointer text-cyan-500">
         New User? Sign Up
+      </Link>
+      <Link
+        href={"/profile/reset-password"}
+        className="cursor-pointer text-cyan-500"
+      >
+        Forgot Password?
       </Link>
     </form>
   );
