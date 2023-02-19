@@ -4,12 +4,12 @@ import { ringtoneBody } from "../../../typings";
 
 interface Props {
   rings: ringtoneBody[];
-  uid: {pfp: string; username: string};
+  uid: { pfp: string; username: string };
 }
 
 const Feed = ({ rings, uid }: Props) => {
   return (
-    <div>
+    <div className="flex flex-col space-y-4 justify-center items-center bg-gray-300 rounded-xl py-4 shadow-md mx-4">
       {rings.map((ring, i) => (
         <MusicItem
           key={i}

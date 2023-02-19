@@ -1,10 +1,10 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { MdUpload } from "react-icons/md";
 import { useAuthContext } from "../Context/AuthContext";
 import { toast } from "react-toastify";
-import { alertCall } from "../../util/toast/alertCall";
+import { alert } from "../../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -69,11 +69,7 @@ const Upload = () => {
       body: fd,
     });
     const payload = await res.json();
-    if (payload.message) {
-      alertCall("update_success", payload.message, id);
-    } else {
-      alertCall("update_error", payload.error, id);
-    }
+    alert(payload, id);
     setLoading(false);
   };
 
@@ -90,7 +86,7 @@ const Upload = () => {
 
         <form
           onSubmit={upload}
-          className="flex flex-col justify-center items-center bg-white 2xl:w-[30%] lg:w-[45%] w-[65%] h-[50%] rounded-xl shadow-xl"
+          className="flex flex-col justify-center items-center bg-white lg:w-[45%] md:w-[50%] sm:w-[60%] w-[90%] h-[50%] rounded-xl shadow-xl"
         >
           {uploadRing && <audio controls className="z-0" src={showcaseRing!} />}
           <div className="w-[70%] mt-4">

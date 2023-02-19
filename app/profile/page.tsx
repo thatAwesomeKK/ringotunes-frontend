@@ -3,17 +3,21 @@ import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useAuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
+import { alert } from "../../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const ProfileChange = () => {
   const { token } = useAuthContext();
   const [profileImg, setProfileImg] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const uploadProfileImgRef = useRef<HTMLInputElement>(null);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const resetForm = () => {
     setProfileImg(null);
+    reset();
   };
 
   //Picking Up From system and adding to UploadRingImage State
@@ -28,6 +32,8 @@ const ProfileChange = () => {
   };
 
   const onSubmit = async (data: any) => {
+    setLoading(true);
+    const id = toast.loading("Updating profile...");
     const res = await fetch(`${hostname}/auth/update`, {
       method: "PUT",
       credentials: "include",
@@ -40,9 +46,9 @@ const ProfileChange = () => {
         username: data.username,
       }),
     });
-    const json = await res.json();
-    console.log(json);
-    
+    const payload = await res.json();
+    alert(payload, id);
+    setLoading(false);
   };
 
   return (

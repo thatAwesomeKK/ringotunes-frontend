@@ -10,7 +10,7 @@ interface Props{
 const ProfileBanner = ({ uid, ringsLength, likesCount }: Props) => {
   
     return (
-      <div className="flex space-x-10 p-8 items-center justify-start flex-row bg-gray-200 rounded-md mb-8 shadow-md">
+      <div className="flex space-x-10 p-8 items-center justify-start flex-col sm:flex-row bg-gray-200 rounded-md mb-8 shadow-md">
         <div className="h-[200px] w-[200px] border border-black relative rounded-md">
           <Image
             src={uid?.pfp || "/images/default-profile-photo.png"}
@@ -25,11 +25,11 @@ const ProfileBanner = ({ uid, ringsLength, likesCount }: Props) => {
             {uid?.username}
           </h1>
           <div className="flex flex-col items-start justify-start">
-            <div className="text-l gap-3 flex  text-gray-400">
+            <div className="text-lg gap-3 flex  text-gray-400">
               <p>Total Ringtones</p>
               <p className="text-black">{ringsLength}</p>
             </div>
-            <div className="text-l gap-3 flex  text-gray-400">
+            <div className="text-lg gap-3 flex  text-gray-400">
               <p>Total Likes</p>
               <p className="text-black">{likesCount}</p>
             </div>

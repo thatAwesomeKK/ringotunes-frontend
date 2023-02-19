@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { alertCall } from "../../../util/toast/alertCall";
+import { alert } from "../../../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -34,14 +34,13 @@ function RegisterForm() {
       }),
     });
     const payload = await res.json();
-    if (payload.message) {
-      alertCall("update_success", payload.message, id);
+    const alertRes = alert(payload, id);
+    if (alertRes) {
       setTimeout(() => {
         router.push("/auth/login");
       }, 2000);
-    } else {
-      alertCall("update_error", payload.error, id);
     }
+
     setLoading(false);
   };
 

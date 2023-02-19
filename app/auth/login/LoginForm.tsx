@@ -3,7 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { alertCall } from "../../../util/toast/alertCall";
+import { alert } from "../../../util/toast/alertCall";
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -14,6 +14,7 @@ function LoginForm() {
   const onSubmit = async (data: any) => {
     setLoading(true);
     const id = toast.loading("Logging In...");
+
     const res = await fetch(`${hostname}/auth/login`, {
       method: "POST",
       headers: {
@@ -23,13 +24,12 @@ function LoginForm() {
       body: JSON.stringify({ email: data.email, password: data.password }),
     });
     const payload = await res.json();
-    if (payload.success) {
-      alertCall("update_success", payload.message, id);
+
+    const alertRes = alert(payload, id);
+    if (alertRes) {
       setTimeout(() => {
         window.location.reload();
       }, 2000);
-    } else {
-      alertCall("update_error", payload.error, id);
     }
     setLoading(false);
   };

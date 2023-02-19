@@ -1,5 +1,15 @@
 import { Id, toast } from "react-toastify";
 
+export const alert = (payload: any, id?: Id) => {
+  if (payload.success) {
+    alertCall("update_success", payload.message, id);
+    return true;
+  } else {
+    alertCall("update_error", payload.error, id);
+    return false;
+  }
+};
+
 export const alertCall = (type: string, message: string, id?: Id) => {
   switch (type) {
     case "success":
