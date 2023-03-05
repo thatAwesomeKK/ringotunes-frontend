@@ -1,5 +1,5 @@
 import FramerMotionDiv from "../../(Providers)/FramerMotionDiv";
-import Feed from "../Feed";
+import FeedLayout from "./(Components)/FeedLayout";
 
 export default function RootLayout({
   children,
@@ -11,7 +11,7 @@ export default function RootLayout({
       {children}
       <FramerMotionDiv>
         {/*@ts-ignore */}
-        <Feed />
+        <FeedLayout />
       </FramerMotionDiv>
     </div>
   );
