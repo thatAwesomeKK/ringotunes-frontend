@@ -24,14 +24,13 @@ function ExternalLogin() {
     <div className="flex flex-col justify-center items-center">
       <GoogleLogin
         onSuccess={async (credentialResponse) => {
-          await GoogleLoginSuccess(credentialResponse);
+          await GoogleLoginSuccess(credentialResponse)
         }}
         onError={() => {
-          console.log("Login Failed");
+          console.log('Login Failed');
         }}
         size="large"
         text="signin_with"
-        width="190"
       />
     </div>
   );

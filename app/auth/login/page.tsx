@@ -13,7 +13,7 @@ const Login = async () => {
             </h1>
           </div>
           <LoginForm />
-          <div className="flex items-center justify-center relative">
+          <div className="flex items-center justify-center relative mb-10">
             <hr className="w-full text-black" />
             <div className="absolute border rounded-full w-fit text-center bg-white p-2">
               OR
