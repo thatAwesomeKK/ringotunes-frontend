@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
   const session = request.cookies.get("refreshToken")?.value;
 
   const isLoggedIn = !!session;
-  console.log(pathname);
 
   if (pathname === "/" && ring) {
     console.log("middleware: redirecting to ring");
