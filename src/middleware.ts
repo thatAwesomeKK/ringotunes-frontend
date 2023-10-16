@@ -8,7 +8,10 @@ export async function middleware(request: NextRequest) {
   const ring: ringtoneBody = await fetchRingRandom();
 
   const session = request.cookies.get("refreshToken")?.value;
-
+  console.log(pathname);
+  console.log(ring);
+  
+  
   const isLoggedIn = !!session;
 
   if (pathname === "/" && ring) {
