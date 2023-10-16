@@ -1,7 +1,6 @@
 import { ringtoneBody } from '@/lib/typings/typings'
 import React from 'react'
 import MusicItem from '../ui/MusicItem'
-import ReduxProvider from '../Providers/ReduxProvider'
 import { store } from '@/lib/redux/store'
 
 interface PageProps {
