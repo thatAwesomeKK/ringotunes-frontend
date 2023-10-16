@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sidebar-close-width: 68px;
+  --sidebar-open-width: 300px;
+  --sidebar-noUser-width: 0%;
+}

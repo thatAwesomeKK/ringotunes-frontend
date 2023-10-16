@@ -1,13 +1,13 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
-  reactStrictMode: false,
+const nextConfig = {
   images: {
-    domains: ['res.cloudinary.com', 'firebasestorage.googleapis.com', 'avatars.dicebear.com', 'lh3.googleusercontent.com'],
-  },
-  experimental: {
-    appDir: true,
-    fontLoaders: [
-      { loader: '@next/font/google', options: { subsets: ['latin'] } },
+    domains: [
+      "res.cloudinary.com",
+      "firebasestorage.googleapis.com",
+      "avatars.dicebear.com",
+      "lh3.googleusercontent.com",
     ],
-  }
-}
+  },
+};
+
+module.exports = nextConfig;
