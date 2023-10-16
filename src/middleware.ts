@@ -6,7 +6,8 @@ import { ringtoneBody } from "./lib/typings/typings";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ring: ringtoneBody = await fetchRingRandom();
-
+  console.log("ring "+ring._id);
+  
   const session = request.cookies.get("refreshToken")?.value;
   console.log("pathname " + pathname);
 
