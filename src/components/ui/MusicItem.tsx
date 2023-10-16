@@ -10,14 +10,15 @@ import { useRouter } from "next/navigation";
 interface PageProps {
   ring: ringtoneBody
   del?: boolean
+  token?: string
 }
 
-const MusicItem = ({ ring, del }: PageProps) => {
-  const token = del ? useAppSelector(store => store.accessToken.token) : ""
+const MusicItem = ({ ring, del, token }: PageProps) => {
+  // const token = useAppSelector(store => store.accessToken.token)
   const router = useRouter()
 
   const handleDelete = async () => {
-    await deleteRing(token, ring._id)
+    await deleteRing(token as string, ring._id)
     router.refresh()
   }
 
