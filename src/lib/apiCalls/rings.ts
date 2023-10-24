@@ -30,14 +30,14 @@ export const fetchRings = async (limit: number, page: number) => {
 };
 
 //Uploading with a Button using API
-export const uploadRing = async (data: any, token: string) => {
+export const uploadRing = async (data: any) => {
   const id = toast.loading("Loading...");
   try {
     const res = await fetch(`${base_url}/upload`, {
       method: "POST",
       credentials: "include",
       headers: {
-        accessToken: token,
+        "Content-Type": "application/json",
       },
       body: data,
     });

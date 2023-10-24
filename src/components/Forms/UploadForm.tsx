@@ -12,7 +12,6 @@ const UploadForm = () => {
     const [selectedOrigin, setSelectedOrigin] = useState("");
     const [title, setTitle] = useState("");
     const [loading, setLoading] = useState<boolean>(false);
-    const token = useAppSelector(store => store.accessToken.token)
 
     // Form reset Function
     const resetForm = () => {
@@ -56,7 +55,7 @@ const UploadForm = () => {
         fd.append("origin", selectedOrigin as string);
         fd.append("title", title as string);
 
-        await uploadRingCall(fd, token)
+        await uploadRingCall(fd)
         setLoading(false);
     };
 
