@@ -4,6 +4,7 @@ import { Pacifico } from "next/font/google";
 import Feed from '@/components/Dashboard/Feed';
 import { fetchUserLikedRings } from '@/lib/apiCalls/profile';
 import { store } from '@/lib/redux/store';
+import { cookies } from 'next/headers';
 
 const pacifico = Pacifico({
     subsets: ["latin"],
@@ -11,8 +12,9 @@ const pacifico = Pacifico({
 });
 
 const MyLiked = async () => {
-    const token = store.getState().accessToken.token
-    const rings = await fetchUserLikedRings(token)
+    const cookieStore = cookies()
+    const accessToken = cookieStore.get('accessToken')?.value as string
+    const rings = await fetchUserLikedRings(accessToken)
 
     return (
         <div className="flex flex-col justify-center space-y-10 mt-8">

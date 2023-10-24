@@ -1,7 +1,7 @@
 import React from "react";
 import { checkLike } from "@/lib/apiCalls/profile";
-import { store } from "@/lib/redux/store";
 import ActivityButton from "./ActivityButton";
+import { cookies } from "next/headers";
 
 interface Props {
   docId: string;
@@ -11,12 +11,13 @@ interface Props {
 }
 
 const Activity = async ({ docId, ringId, title }: Props) => {
-  const token = store.getState().accessToken.token
-  const like = await checkLike(token, docId)
+  const cookieStore = cookies()
+  const accessToken = cookieStore.get('accessToken')?.value as string
+  const like = await checkLike(accessToken, docId)
 
   return (
     <div className="flex space-x-2 mb-4">
-      <ActivityButton token={token} docId={docId} ringId={ringId} title={title} like={like} />
+      <ActivityButton docId={docId} ringId={ringId} title={title} like={like} />
     </div>
   );
 };

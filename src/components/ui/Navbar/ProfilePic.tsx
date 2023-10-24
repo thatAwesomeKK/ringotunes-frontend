@@ -2,9 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { getPfp } from "@/lib/apiCalls/profile";
 
-async function ProfilePic({ token }: { token: string }) {
-  const pfp = await getPfp(token)
-
+async function ProfilePic({ user }: { user: any }) {
   return (
     <div
       className="h-12 w-12 overflow-hidden rounded-full relative"
@@ -12,7 +10,7 @@ async function ProfilePic({ token }: { token: string }) {
     >
       <Image
         className="object-cover"
-        src={pfp || "/images/default-profile-photo.png"}
+        src={user.pfp || "/images/default-profile-photo.png"}
         alt=""
         fill
       />

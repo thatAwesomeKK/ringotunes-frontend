@@ -4,21 +4,18 @@ import React from "react";
 import { ringtoneBody } from "@/lib/typings/typings";
 import { IoTrash } from "react-icons/io5";
 import { deleteRing } from "@/lib/apiCalls/rings";
-import { store, useAppSelector } from "@/lib/redux/store";
 import { useRouter } from "next/navigation";
 
 interface PageProps {
   ring: ringtoneBody
   del?: boolean
-  token?: string
 }
 
-const MusicItem = ({ ring, del, token }: PageProps) => {
-  // const token = useAppSelector(store => store.accessToken.token)
+const MusicItem = ({ ring, del }: PageProps) => {
   const router = useRouter()
 
   const handleDelete = async () => {
-    await deleteRing(token as string, ring._id)
+    await deleteRing(ring._id)
     router.refresh()
   }
 

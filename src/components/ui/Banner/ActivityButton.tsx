@@ -7,18 +7,17 @@ import { useRouter } from 'next/navigation';
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 interface PageProps {
-    token: string
     docId: string
     ringId: string
     title: string
     like: boolean
 }
 
-const ActivityButton = ({ token, docId, ringId, title, like }: PageProps) => {
+const ActivityButton = ({docId, ringId, title, like }: PageProps) => {
     const router = useRouter()
     //Handle Download
     const handleDownload = async () => {
-        const payload = await downloadRing(token, docId);
+        const payload = await downloadRing(docId);
         if (payload === true) {
             saveAs(`${hostname}/ring/download/${ringId}`, `${title}: Ringotunes`);
         }
@@ -26,7 +25,7 @@ const ActivityButton = ({ token, docId, ringId, title, like }: PageProps) => {
 
     //Handle Like
     const handleLike = async () => {
-        await liking(token, docId)
+        await liking(docId)
         router.refresh()
     };
 

@@ -48,12 +48,12 @@ export const uploadRing = async (data: any, token: string) => {
   }
 };
 
-export const deleteRing = async (token: string, fileID: string) => {
+export const deleteRing = async (fileID: string) => {
   const payload = await fetch(`${base_url}/delete/${fileID}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
     },
+    credentials: "include",
   }).then((res) => res.json());
 };

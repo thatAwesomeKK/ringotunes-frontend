@@ -1,12 +1,10 @@
 'use client'
 import { updateUser } from '@/lib/apiCalls/auth';
-import { useAppSelector } from '@/lib/redux/store';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form';
 
 const ProfileForm = () => {
-    const token = useAppSelector(store => store.accessToken.token)
     const [profileImg, setProfileImg] = useState<string | null>(null);
     const [loading, setLoading] = useState(false);
     const uploadProfileImgRef = useRef<HTMLInputElement>(null);
@@ -25,7 +23,7 @@ const ProfileForm = () => {
 
     const onSubmit = async (data: any) => {
         setLoading(true);
-        await updateUser(token, profileImg, data)
+        await updateUser(profileImg, data)
         setLoading(false);
     };
 

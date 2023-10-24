@@ -6,12 +6,11 @@ import { ringtoneBody } from "./lib/typings/typings";
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const ring: ringtoneBody = await fetchRingRandom();
-  console.log("ring "+ring._id);
-  
-  const session = request.cookies.get("refreshToken")?.value;
-  console.log("pathname " + pathname);
+
+  const session = request.cookies.get("accessToken")?.value;
 
   const isLoggedIn = !!session;
+  console.log(pathname);
 
   if (pathname === "/" && ring) {
     console.log("middleware: redirecting to ring");
@@ -20,6 +19,10 @@ export async function middleware(request: NextRequest) {
   if (pathname === "/signin" && isLoggedIn) {
     console.log("middleware: redirecting to /");
     return NextResponse.redirect(new URL("/", request.url));
+  }
+  if (pathname.startsWith("/dashboard") && !isLoggedIn) {
+    console.log("middleware: redirecting to /signin");
+    return NextResponse.redirect(new URL("/signin", request.url));
   }
 
   //   if (pathname.startsWith("/profile") && !isLoggedIn) {
@@ -30,5 +33,5 @@ export async function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/", "/signin"],
+  matcher: ["/", "/signin", "/dashboard"],
 };

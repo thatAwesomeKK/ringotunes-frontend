@@ -19,7 +19,7 @@ const spring = {
 
 const Sidebar = () => {
   const isOpen = useAppSelector(store => store.sidebar.isOpen)
-  const token = useAppSelector(store => store.accessToken.token)
+  const user = useAppSelector(store => store.user.user)
   const pathname = usePathname();
 
   //Using useMemo to prevent Spam Re-Renders
@@ -31,7 +31,7 @@ const Sidebar = () => {
 
   return (
     <div className="sm:flex hidden">
-      {token && (
+      {user && (
         <motion.div
           initial={{ width: "--sidebar-close-width" }}
           transition={spring}
@@ -58,7 +58,7 @@ const Sidebar = () => {
             <Link href={"/dashboard"}>
               <SidebarItem Icon={MdSpaceDashboard} MenuName={"Dashboard"} />
             </Link>
-            <div onClick={() => handleLogout(token)}>
+            <div onClick={() => handleLogout()}>
               <SidebarItem Icon={IoLogOut} MenuName={"SignOut"} />
             </div>
           </div>

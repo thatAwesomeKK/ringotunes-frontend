@@ -1,12 +1,13 @@
 'use client'
 import { storeToken } from '@/lib/redux/slices/accessTokenSlice';
+import { storeUser } from '@/lib/redux/slices/userSlice';
 import { store } from '@/lib/redux/store';
 import { useRef } from 'react'
 
-function PreLoader({ accessToken }: { accessToken: string }) {
+function PreLoader({ user }: { user: string }) {
     const loaded = useRef(false);
     if (!loaded.current) {
-        store.dispatch(storeToken(accessToken))
+        store.dispatch(storeUser(user))
         loaded.current = true
     }
     return null

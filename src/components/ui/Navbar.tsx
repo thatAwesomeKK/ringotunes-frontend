@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { IoMdCloudUpload } from "react-icons/io";
 import { IoLogInSharp } from "react-icons/io5";
-// import DropDown from "./(DropDown)/DropDown";
 import { Permanent_Marker } from "next/font/google";
 import ReduxProvider from "../Providers/ReduxProvider";
 import ProfilePic from "./Navbar/ProfilePic";
@@ -14,18 +13,18 @@ const permanent_marker = Permanent_Marker({
 });
 
 const Navbar = () => {
-  const token = store.getState().accessToken.token
+  const user = store.getState().user.user
 
   return (
     <nav className="flex justify-between items-center px-4 h-20 shadow-lg sticky top-0 bg-white z-50">
       <div className="flex items-center space-x-2">
         <ReduxProvider>
-          {token && <SideBarButton />}
+          {user && <SideBarButton />}
         </ReduxProvider>
         <Link href={'/'} className={`${permanent_marker.className} text-2xl`}>RingoTunes</Link>
       </div>
       <div className="flex space-x-2">
-        {token ? (
+        {user ? (
           <div className="flex justify-center items-center space-x-2">
             <Link
               href={"/upload"}
@@ -35,7 +34,7 @@ const Navbar = () => {
               <p className="text-blue-500">Upload</p>
             </Link>
             <div className="relative">
-              <ProfilePic token={token} />
+              <ProfilePic user={user} />
               {/* <DropDown /> */}
             </div>
           </div>
@@ -48,7 +47,7 @@ const Navbar = () => {
             <p className="text-blue-500">SignIn</p>
           </Link>
         )}
-        {!token && (
+        {!user && (
           <Link
             href={"/signup"}
             className="cursor-pointer flex items-center space-x-1 h-11 border-2 border-blue-400 px-5 rounded-full"

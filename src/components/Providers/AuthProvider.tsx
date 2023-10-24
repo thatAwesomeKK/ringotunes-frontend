@@ -3,17 +3,19 @@ import PreLoader from "./Preloader"
 import { cookies } from "next/headers"
 import { refreshAccessToken } from "@/lib/apiCalls/auth"
 import { storeToken } from "@/lib/redux/slices/accessTokenSlice"
+import { getPfp } from "@/lib/apiCalls/profile"
+import { storeUser } from "@/lib/redux/slices/userSlice"
 
 async function AuthProvider({ children }: { children: React.ReactNode }) {
     const cookieStore = cookies()
-    const refreshToken = cookieStore.get('refreshToken')?.value
-    const accessToken = await refreshAccessToken(refreshToken!)
+    const accessToken = cookieStore.get('accessToken')?.value
+    const user = await getPfp(accessToken!)
 
-    store.dispatch(storeToken(accessToken))
+    store.dispatch(storeUser(user))
 
     return (
         <>
-            <PreLoader accessToken={accessToken!} />
+            <PreLoader user={user} />
             {children}
         </>
     )

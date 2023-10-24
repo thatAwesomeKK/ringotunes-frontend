@@ -4,9 +4,7 @@ import React from 'react'
 
 const Profile = () => {
     return (
-        <ReduxProvider>
-            <ProfileForm />
-        </ReduxProvider>
+        <ProfileForm />
     )
 }
 

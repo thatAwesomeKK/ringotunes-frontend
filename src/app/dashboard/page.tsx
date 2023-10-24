@@ -1,12 +1,12 @@
 import React from 'react'
 import { fetchUserDashboard } from '@/lib/apiCalls/profile';
-import { store } from '@/lib/redux/store';
 import Widget from '@/components/Dashboard/Widget';
 import { BsHeart, BsMusicNoteList } from "react-icons/bs";
 import { HiFolderDownload } from "react-icons/hi";
 import { Unbounded } from "next/font/google";
 import Feed from '@/components/Dashboard/Feed';
 import FramerMotionDiv from '@/components/Providers/FramerMotionDiv';
+import { cookies } from 'next/headers';
 
 const unbounded = Unbounded({
     subsets: ["latin"],
@@ -14,8 +14,10 @@ const unbounded = Unbounded({
 });
 
 const Dashboard = async () => {
-    const token = store.getState().accessToken.token
-    const dash = await fetchUserDashboard(token)
+    const cookieStore = cookies()
+    const accessToken = cookieStore.get('accessToken')?.value as string
+    const dash = await fetchUserDashboard(accessToken)
+
     return (
         <main className="flex flex-col justify-center items-center mt-24 space-y-24">
             <h1 className={`${unbounded.className} text-4xl`}>Welcome, {dash?.uid.username}!</h1>

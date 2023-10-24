@@ -8,44 +8,51 @@ if (isServer) host_url = process.env.BACKEND_URL;
 else host_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 const base_url = `${host_url}/user`;
 
-export const getPfp = async (token: string) => {
+export const getPfp = async (accessToken: string) => {
   const res = await fetch(`${base_url}/info`, {
-    headers: { accessToken: token },
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `accessToken=${accessToken}`,
+    },
+    credentials: "include",
   });
   const payload = await res.json();
-  return payload.message.pfp;
+  return payload.message;
 };
 
-export const fetchUserLikedRings = async (token: string) => {
+export const fetchUserLikedRings = async (accessToken: string) => {
   const payload = await fetch(`${base_url}/myliked`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
+      Cookie: `accessToken=${accessToken}`,
     },
+    credentials: "include",
   }).then((res) => res.json());
   return payload.message;
 };
 
-export const fetchUserDownloadedRings = async (token: string) => {
+export const fetchUserDownloadedRings = async (accessToken: string) => {
   const payload = await fetch(`${base_url}/mydownloads`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
+      Cookie: `accessToken=${accessToken}`,
     },
+    credentials: "include",
   }).then((res) => res.json());
   return payload.message;
 };
 
-export const fetchUserDashboard = async (token: string) => {
+export const fetchUserDashboard = async (accessToken: string) => {
   const payload = await fetch(`${base_url}/dash`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
+      Cookie: `accessToken=${accessToken}`,
     },
-    cache: "no-store",
+    credentials: "include",
   }).then((res) => res.json());
   return payload.message;
 };
@@ -57,27 +64,25 @@ export const fetchUserInfo = async (userID: string) => {
   return userInfo;
 };
 
-export const handleLike = async (token: string, docId: string) => {
+export const handleLike = async (docId: string) => {
   const payload = await fetch(`${base_url}/handle-like`, {
     method: "PATCH",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
     },
     body: JSON.stringify({ docId }),
   }).then((res) => res.json());
   return payload.message;
 };
 
-export const downloadRing = async (token: string, docId: string) => {
+export const downloadRing = async (docId: string) => {
   const id = toast.loading("Downloading...");
   const payload = await fetch(`${base_url}/handle-download`, {
     method: "PATCH",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
     },
     body: JSON.stringify({ docId }),
   }).then((res) => res.json());
@@ -85,13 +90,13 @@ export const downloadRing = async (token: string, docId: string) => {
   return payload.success;
 };
 
-export const checkLike = async (token: string, docId: string) => {
+export const checkLike = async (accessToken: string, docId: string) => {
   const payload = await fetch(`${base_url}/check-like`, {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
+      Cookie: `accessToken=${accessToken}`,
     },
     body: JSON.stringify({ docId }),
   }).then((res) => res.json());

@@ -67,14 +67,13 @@ export const refreshAccessToken = async (refreshToken: string) => {
   return payload.accessToken;
 };
 
-export const updateUser = async (token: string, profileImg: any, data: any) => {
+export const updateUser = async (profileImg: any, data: any) => {
   const id = toast.loading("Updating profile...");
   const payload = await fetch(`${base_url}/update`, {
     method: "PUT",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
     },
     body: JSON.stringify({
       pfp: profileImg,
@@ -84,13 +83,12 @@ export const updateUser = async (token: string, profileImg: any, data: any) => {
   alertCall(payload, id);
 };
 
-export const handleLogout = async (token: string) => {
+export const handleLogout = async () => {
   const id = toast.loading("Signing in...");
   const payload = await fetch(`${base_url}/logout`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      accessToken: token,
     },
     credentials: "include",
   }).then((res) => res.json());
