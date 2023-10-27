@@ -9,7 +9,7 @@ const RingFeed = async () => {
     const rings: ringtoneBody[] = await fetchRings(5, 1)
     return (
         <FramerMotionDiv>
-            <section className='bg-gray-200 overflow-hidden overflow-y-scroll h-[50vh] mr-10 mt-10 shadow-lg rounded-lg'>
+            <section className='bg-gray-200 overflow-hidden overflow-y-scroll mx-4 h-[50vh] mt-10 shadow-lg rounded-lg scrollbar-hide'>
                 <ProvidesQueryClient>
                     <Results initialRings={rings} />
                 </ProvidesQueryClient>

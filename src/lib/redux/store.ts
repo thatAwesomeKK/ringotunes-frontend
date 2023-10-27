@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
-import accessTokenSlice from "./slices/accessTokenSlice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import sidebarSlice from "./slices/sidebarSlice";
 import userSlice from "./slices/userSlice";
+import dropdownSlice from "./slices/dropdownSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
     sidebar: sidebarSlice,
+    dropdown: dropdownSlice,
   },
 });
 

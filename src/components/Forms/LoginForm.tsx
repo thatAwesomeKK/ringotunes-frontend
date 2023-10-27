@@ -1,22 +1,16 @@
 "use client";
 import { signIn } from "@/lib/apiCalls/auth";
-import { storeToken } from "@/lib/redux/slices/accessTokenSlice";
-import { useAppDispatch } from "@/lib/redux/store";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 function LoginForm() {
   const { register, handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
-  const dispatch = useAppDispatch()
 
   const onSubmit = async (data: any) => {
     setLoading(true);
-    // const id = toast.loading("Logging In...");
-    const accessToken = await signIn(data)
-    dispatch(storeToken(accessToken))
+    await signIn(data)
     setLoading(false);
   };
 
