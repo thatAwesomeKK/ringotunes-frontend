@@ -1,8 +1,6 @@
 import { store } from "@/lib/redux/store"
 import PreLoader from "./Preloader"
 import { cookies } from "next/headers"
-import { refreshAccessToken } from "@/lib/apiCalls/auth"
-import { storeToken } from "@/lib/redux/slices/accessTokenSlice"
 import { getPfp } from "@/lib/apiCalls/profile"
 import { storeUser } from "@/lib/redux/slices/userSlice"
 

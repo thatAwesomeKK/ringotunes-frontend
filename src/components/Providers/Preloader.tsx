@@ -1,5 +1,4 @@
 'use client'
-import { storeToken } from '@/lib/redux/slices/accessTokenSlice';
 import { storeUser } from '@/lib/redux/slices/userSlice';
 import { store } from '@/lib/redux/store';
 import { useRef } from 'react'
