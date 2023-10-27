@@ -1,8 +1,9 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { downloadRing, handleLike as liking } from '@/lib/apiCalls/profile';
 import { saveAs } from "file-saver";
 import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -13,20 +14,35 @@ interface PageProps {
     like: boolean
 }
 
-const ActivityButton = ({docId, ringId, title, like }: PageProps) => {
+const ActivityButton = ({ docId, ringId, title, like }: PageProps) => {
     const router = useRouter()
+
+    const [isLiked, setIsLiked] = useState(like)
+
+    const { mutate: handleLike, isLoading } = useMutation({
+        mutationFn: async () => {
+            const response = await liking(docId)
+            return response
+        },
+        onMutate: async () => {
+            const previousLikeState = isLiked
+            setIsLiked(!isLiked)
+            return { previousLikeState }
+        },
+        onError: (_, __, context: any) => {
+            setIsLiked(context?.previousLikeState)
+        },
+        onSettled: () => {
+            router.refresh()
+        }
+    })
+
     //Handle Download
     const handleDownload = async () => {
         const payload = await downloadRing(docId);
         if (payload === true) {
             saveAs(`${hostname}/ring/download/${ringId}`, `${title}: Ringotunes`);
         }
-    };
-
-    //Handle Like
-    const handleLike = async () => {
-        await liking(docId)
-        router.refresh()
     };
 
     return (
@@ -37,7 +53,7 @@ const ActivityButton = ({docId, ringId, title, like }: PageProps) => {
             >
                 Download
             </button>
-            {!like ? (
+            {!isLiked ? (
                 <button
                     onClick={() => handleLike()}
                     className="bg-blue-500 w-36 py-3 rounded-xl"

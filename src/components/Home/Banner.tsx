@@ -14,7 +14,7 @@ interface PageProps {
 const Banner = ({ ring }: PageProps) => {
     return (
         <FramerMotionDiv>
-            <div className="bg-gray-200 shadow-lg px-7 py-5">
+            <div className="bg-gray-200 shadow-lg px-7 py-5 h-[32vh]">
                 <h2 className="text-4xl font-extrabold">{ring?.title}</h2>
                 <div className="text-gray-400 flex space-x-2">
                     <Link href={`/profile/${ring?.uid?._id}`}>

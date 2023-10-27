@@ -6,7 +6,7 @@ import ReduxProvider from '@/components/Providers/ReduxProvider'
 import Navbar from '@/components/ui/Navbar'
 import dynamic from 'next/dynamic'
 import ToastProviders from '@/components/Providers/ToastProvider'
-const Sidebar = dynamic(() => import('@/components/ui/Sidebar'), { ssr: false, loading: () => <p>Loading....</p> })
+const Sidebar = dynamic(() => import('@/components/ui/Sidebar'), { ssr: false })
 
 const inter = Inter({ subsets: ['latin'] })
 

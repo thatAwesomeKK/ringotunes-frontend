@@ -2,6 +2,7 @@ import React from "react";
 import { checkLike } from "@/lib/apiCalls/profile";
 import ActivityButton from "./ActivityButton";
 import { cookies } from "next/headers";
+import ProvidesQueryClient from "@/components/Providers/ProvidesQueryClient";
 
 interface Props {
   docId: string;
@@ -17,7 +18,9 @@ const Activity = async ({ docId, ringId, title }: Props) => {
 
   return (
     <div className="flex space-x-2 mb-4">
-      <ActivityButton docId={docId} ringId={ringId} title={title} like={like} />
+      <ProvidesQueryClient>
+        <ActivityButton docId={docId} ringId={ringId} title={title} like={like} />
+      </ProvidesQueryClient>
     </div>
   );
 };
