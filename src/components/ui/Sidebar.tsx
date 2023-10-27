@@ -4,7 +4,6 @@ import { MdSpaceDashboard } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
 import Link from "next/link";
 import { motion } from "framer-motion";
-// import { alertCall } from "../util/toast/alertCall";
 import SidebarItem from "./Sidebar/SidebarItem";
 import { sidebarItems } from "./Sidebar/SidebarData";
 import { useAppSelector } from "@/lib/redux/store";
