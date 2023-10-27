@@ -36,9 +36,6 @@ export const uploadRing = async (data: any) => {
     const res = await fetch(`${base_url}/upload`, {
       method: "POST",
       credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: data,
     });
     const payload = await res.json();

@@ -1,6 +1,5 @@
 'use client'
 import { uploadRing as uploadRingCall } from '@/lib/apiCalls/rings';
-import { useAppSelector } from '@/lib/redux/store';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react'
 import { MdUpload } from 'react-icons/md';
