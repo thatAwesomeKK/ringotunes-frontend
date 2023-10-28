@@ -1,6 +1,6 @@
 'use client'
-import React, { useState } from 'react'
-import { downloadRing, handleLike as liking } from '@/lib/apiCalls/profile';
+import React, { useEffect, useState } from 'react'
+import { checkLike, downloadRing, handleLike as liking } from '@/lib/apiCalls/profile';
 import { saveAs } from "file-saver";
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -11,13 +11,23 @@ interface PageProps {
     docId: string
     ringId: string
     title: string
-    like: boolean
+    accessToken: string
 }
 
-const ActivityButton = ({ docId, ringId, title, like }: PageProps) => {
+const ActivityButton = ({ docId, ringId, title, accessToken }: PageProps) => {
     const router = useRouter()
 
-    const [isLiked, setIsLiked] = useState(like)
+    const [isLiked, setIsLiked] = useState(false)
+
+    const checkingLike = async () => {
+        const response = await checkLike(accessToken, docId)
+        setIsLiked(response)
+    }
+
+    useEffect(() => {
+        checkingLike()
+    }, [setIsLiked])
+
 
     const { mutate: handleLike, isLoading } = useMutation({
         mutationFn: async () => {
@@ -31,7 +41,8 @@ const ActivityButton = ({ docId, ringId, title, like }: PageProps) => {
         onError: (_, __, context: any) => {
             setIsLiked(context?.previousLikeState)
         },
-        onSettled: () => {
+        onSettled: async () => {
+            await checkingLike()
             router.refresh()
         }
     })

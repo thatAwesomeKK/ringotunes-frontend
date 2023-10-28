@@ -12,7 +12,6 @@ interface PageProps {
 }
 
 const Banner = ({ ring }: PageProps) => {
-
     return (
         <FramerMotionDiv>
             <div className="bg-gray-200 shadow-lg px-7 py-5">
