@@ -15,4 +15,5 @@ const RingPlayer = async ({ params: { ringId } }: PageProps) => {
     )
 }
 
+export const dynamic = "force-dynamic"
 export default RingPlayer

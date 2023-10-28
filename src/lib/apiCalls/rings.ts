@@ -16,9 +16,9 @@ export const fetchRingRandom = async () => {
 };
 
 export const fetchRingWithId = async (ringID: string) => {
-  const payload = await fetch(`${base_url}/getone/${ringID}`).then((res) =>
-    res.json()
-  );
+  const payload = await fetch(`${base_url}/getone/${ringID}`, {
+    cache: "no-store",
+  }).then((res) => res.json());
   return payload.message;
 };
 
