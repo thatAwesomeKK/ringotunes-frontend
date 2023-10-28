@@ -21,10 +21,9 @@ const ActivityButton = ({ docId, ringId, title, like }: PageProps) => {
 
     const { mutate: handleLike, isLoading } = useMutation({
         mutationFn: async () => {
-            const response = await liking(docId)
-            return response
+            await liking(docId)
         },
-        onMutate: async () => {
+        onMutate: () => {
             const previousLikeState = isLiked
             setIsLiked(!isLiked)
             return { previousLikeState }

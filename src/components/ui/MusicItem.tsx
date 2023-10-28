@@ -4,7 +4,7 @@ import React from "react";
 import { ringtoneBody } from "@/lib/typings/typings";
 import { IoTrash } from "react-icons/io5";
 import { deleteRing } from "@/lib/apiCalls/rings";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 interface PageProps {
   ring: ringtoneBody
@@ -13,6 +13,7 @@ interface PageProps {
 
 const MusicItem = ({ ring, del }: PageProps) => {
   const router = useRouter()
+  const pathname = usePathname()
 
   const handleDelete = async () => {
     await deleteRing(ring._id)
@@ -21,11 +22,9 @@ const MusicItem = ({ ring, del }: PageProps) => {
 
   return (
     <div
-      // onClick={ringClick}
       className="bg-gray-300 rounded-lg w-[97%] py-2 px-3 relative"
     >
       <div
-        // onClick={() => console.log("Listen!")}
         className="flex items-center space-x-5 w-full"
       >
         <div className="relative h-20 w-20 shadow-lg ">
@@ -41,7 +40,7 @@ const MusicItem = ({ ring, del }: PageProps) => {
         </div>
         <div>
           <p className="font-medium text-xl">{ring.title}</p>
-          <p>Uploaded By {ring.uid?.username}</p>
+          {pathname !== "/dashboard" && <p>Uploaded By {ring.uid?.username}</p>}
         </div>
       </div>
       {del && <div className="absolute right-10 top-10 cursor-pointer flex space-x-7">
