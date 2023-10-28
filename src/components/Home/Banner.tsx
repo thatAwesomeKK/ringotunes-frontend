@@ -38,14 +38,8 @@ const Banner = ({ ring }: PageProps) => {
                     </div>
                     <div>
                         <div className="mb-6">
-                            <p className="text-xl font-semibold text-center">
-                                DOWNLOADS {ring?.downloads?.length} | LIKES {ring?.likes?.length}
-                            </p>
                             <Activity
-                                docId={ring?._id}
-                                likes={ring?.likes}
-                                ringId={ring?.ringID}
-                                title={ring?.title}
+                                ring={ring}
                             />
                             <Player ringID={ring?.ringID} />
                         </div>

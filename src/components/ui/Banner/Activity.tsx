@@ -1,26 +1,21 @@
 import React from "react";
-import { checkLike } from "@/lib/apiCalls/profile";
 import ActivityButton from "./ActivityButton";
 import { cookies } from "next/headers";
 import ProvidesQueryClient from "@/components/Providers/ProvidesQueryClient";
+import { ringtoneBody } from "@/lib/typings/typings";
 
 interface Props {
-  docId: string;
-  likes: Array<string>;
-  ringId: string;
-  title: string;
+  ring: ringtoneBody
 }
 
-const Activity = async ({ docId, ringId, title }: Props) => {
+const Activity = async ({ ring }: Props) => {
   const cookieStore = cookies()
   const accessToken = cookieStore.get('accessToken')?.value as string
 
   return (
-    <div className="flex space-x-2 mb-4">
-      <ProvidesQueryClient>
-        <ActivityButton docId={docId} ringId={ringId} title={title} accessToken={accessToken}/>
-      </ProvidesQueryClient>
-    </div>
+    <ProvidesQueryClient>
+      <ActivityButton ring={ring} accessToken={accessToken} />
+    </ProvidesQueryClient>
   );
 };
 
