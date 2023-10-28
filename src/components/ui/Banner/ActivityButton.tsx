@@ -5,9 +5,8 @@ import { saveAs } from "file-saver";
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { ringtoneBody } from '@/lib/typings/typings';
-import { revalidateTag } from 'next/cache';
 
-const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
+const hostname = process.env.NEXT_PUBLIC_BACKEND_URL
 
 interface PageProps {
     ring: ringtoneBody
@@ -65,7 +64,7 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
     const handleDownload = async () => {
         const payload = await downloadRing(ring._id);
         if (payload === true) {
-            saveAs(`${hostname}/ring/download/${ring._id}`, `${ring.title}: Ringotunes`);
+            saveAs(`${hostname}/ring/download/${ring.ringID}`, `${ring.title}: Ringotunes.mp3`);
         }
     };
 
