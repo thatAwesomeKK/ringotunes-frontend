@@ -66,6 +66,7 @@ const Results = ({ initialRings }: PageProps) => {
                     </Link>
                     </li>
             })}
+            {isFetchingNextPage && <li>Loading...</li>}
         </ul>
     )
 }

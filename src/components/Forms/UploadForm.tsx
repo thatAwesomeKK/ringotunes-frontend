@@ -56,6 +56,7 @@ const UploadForm = () => {
 
         await uploadRingCall(fd)
         setLoading(false);
+        resetForm()
     };
 
     // Reference to the Image Preview
@@ -63,7 +64,6 @@ const UploadForm = () => {
     const uploadImgRef = useRef<HTMLInputElement>(null);
     return (
         <div className="flex justify-center items-center h-screen">
-            {/* {loading && <h1 className="font-bold text-3xl">Loading....</h1>} */}
             <div className="w-full h-full justify-center items-center flex flex-col space-y-2">
                 <h1 className="font-extrabold text-7xl mb-2">Upload</h1>
                 <hr className="w-60 bg-gray-400 h-[0.1rem]" />

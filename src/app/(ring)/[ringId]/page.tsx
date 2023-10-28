@@ -8,10 +8,10 @@ interface PageProps {
     }
 }
 
-const RingPlayer = async({ params: { ringId } }: PageProps) => {
+const RingPlayer = async ({ params: { ringId } }: PageProps) => {
     const ring = await fetchRingWithId(ringId)
     return (
-        <Banner ring={ring}/>
+        <Banner ring={ring} />
     )
 }
 

@@ -46,11 +46,17 @@ export const uploadRing = async (data: any) => {
 };
 
 export const deleteRing = async (fileID: string) => {
-  const payload = await fetch(`${base_url}/delete/${fileID}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    credentials: "include",
-  }).then((res) => res.json());
+  const id = toast.loading("Loading...");
+  try {
+    const payload = await fetch(`${base_url}/delete/${fileID}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    }).then((res) => res.json());
+    alertCall(payload, id);
+  } catch (error) {
+    console.log(error);
+  }
 };
