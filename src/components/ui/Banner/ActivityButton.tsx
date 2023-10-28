@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { ringtoneBody } from '@/lib/typings/typings';
+import { revalidateTag } from 'next/cache';
 
 const hostname = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -16,6 +17,7 @@ interface PageProps {
 const ActivityButton = ({ ring, accessToken }: PageProps) => {
     const [isLiked, setIsLiked] = useState(false)
     const [likes, setLikes] = useState(ring.likes.length)
+    const router = useRouter()
 
     const checkingLike = async () => {
         const response = await checkLike(accessToken, ring._id)
@@ -51,8 +53,8 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
             setIsLiked(context?.previousLikeState)
             setLikes(context?.previousLikes)
         },
-        onSettled: async () => {
-            await checkingLike()
+        onSettled: () => {
+            router.refresh()
         }
     })
 
