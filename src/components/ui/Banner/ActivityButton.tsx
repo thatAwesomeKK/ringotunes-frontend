@@ -54,6 +54,7 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
             setLikes(context?.previousLikes)
         },
         onSettled: () => {
+            console.log('Refreshing Banner');
             router.refresh()
         }
     })
