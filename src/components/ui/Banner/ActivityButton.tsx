@@ -17,8 +17,6 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
     const [isLiked, setIsLiked] = useState(false)
     const [likes, setLikes] = useState(ring.likes.length)
 
-    const router = useRouter()
-
     const checkingLike = async () => {
         const response = await checkLike(accessToken, ring._id)
         setIsLiked(response)
@@ -54,7 +52,7 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
             setLikes(context?.previousLikes)
         },
         onSettled: async () => {
-            
+            await checkingLike()
         }
     })
 
