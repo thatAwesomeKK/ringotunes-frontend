@@ -15,12 +15,14 @@ interface PageProps {
 }
 
 const ActivityButton = ({ ring, accessToken }: PageProps) => {
-    const [isLiked, setIsLiked] = useState(false)
+    const [isLiked, setIsLiked] = useState<Boolean | null>(null)
     const [likes, setLikes] = useState(ring.likes.length)
     const router = useRouter()
 
     const checkingLike = async () => {
         const response = await checkLike(accessToken, ring._id)
+        console.log(response);
+        
         setIsLiked(response)
     }
 
@@ -79,21 +81,28 @@ const ActivityButton = ({ ring, accessToken }: PageProps) => {
                 >
                     Download
                 </button>
-                {!isLiked ? (
-                    <button
-                        onClick={() => handleLike()}
-                        className="bg-blue-500 w-36 py-3 rounded-xl"
-                    >
-                        Like
-                    </button>
-                ) : (
-                    <button
-                        onClick={() => handleLike()}
-                        className="bg-red-500 w-36 py-3 rounded-xl"
-                    >
-                        UnLike
-                    </button>
-                )}
+                {isLiked !== null ? <>
+                    {!isLiked ? (
+                        <button
+                            onClick={() => handleLike()}
+                            className="bg-blue-500 w-36 py-3 rounded-xl"
+                        >
+                            Like
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => handleLike()}
+                            className="bg-red-500 w-36 py-3 rounded-xl"
+                        >
+                            UnLike
+                        </button>
+                    )}
+                </> : <button
+                    className="bg-green-400 w-36 py-3 rounded-xl"
+                    disabled={!isLiked}
+                >
+                    Loading...
+                </button>}
             </div>
         </div>
     )

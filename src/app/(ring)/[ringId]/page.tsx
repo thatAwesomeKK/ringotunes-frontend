@@ -15,5 +15,4 @@ const RingPlayer = async ({ params: { ringId } }: PageProps) => {
     )
 }
 
-export const revalidate = 0
 export default RingPlayer
